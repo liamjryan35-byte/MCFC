@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manatee County Film Club</title>
+<link rel="icon" type="image/jpeg" href="IMG_2108.JPEG">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   @font-face {
@@ -75,7 +76,6 @@
     width: 44px;
     height: 44px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
   }
 
   .nav-wordmark {
@@ -632,7 +632,7 @@
     padding: 48px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 28px;
     align-items: start;
   }
 
@@ -641,18 +641,21 @@
     overflow: hidden;
     border-radius: 2px;
     transition: border-color 0.2s;
+    display: flex;
+    flex-direction: column;
   }
 
   .film-card:hover { border-color: rgba(245,244,240,0.35); }
 
   .film-thumb {
-    aspect-ratio: 16/9;
+    height: 180px;
     background: var(--gray-dark);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
   }
 
   .film-thumb-inner {
@@ -905,7 +908,7 @@
     margin: 60px auto 0;
     max-width: 680px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1px;
     background: rgba(245,244,240,0.08);
   }
@@ -1273,7 +1276,7 @@
 <nav id="main-nav">
   <a class="nav-logo" href="#" onclick="showPage('home')">
     <div class="nav-logo-mark">
-      <img src="IMG_2108.JPEG" alt="MCFC Logo">
+      <img src="mcfc-logo.JPEG" alt="MCFC Logo">
     </div>
     <div class="nav-wordmark">
       Manatee County
@@ -1354,7 +1357,7 @@
         <div class="stat-label">Screenings hosted</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">1st Year</div>
+        <div class="stat-number">1</div>
         <div class="stat-label">Years running</div>
       </div>
     </div>
@@ -1391,7 +1394,7 @@
     <div class="about-sidebar">
       <div class="about-sidebar-item">
         <div class="about-sidebar-label">Founded</div>
-        <div class="about-sidebar-value">Manatee County, FL</div>
+        <div class="about-sidebar-value">2026 - Manatee County, FL</div>
       </div>
       <div class="about-sidebar-item">
         <div class="about-sidebar-label">Type</div>
@@ -1641,18 +1644,33 @@
         <div class="film-title">House of Colts S2 E1</div>
         <p class="film-desc">House of Colts season 2 returns</p>
       </div>
+    </div>
     <div class="film-card" data-type="documentary">
       <div class="film-thumb" style="padding:0; height:200px;">
         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZRTgKZKKYi0" frameborder="0" allowfullscreen style="display:block;"></iframe>
       </div>
-    <div class="film-info">
-      <div class="film-tag">Documentary · 2026</div>
-      <div class="film-title">Manatee County Fair</div>
-      <p class="film-desc">Watch as Nolan Film Studios takes a deep dive into the Manatee County Fair!</p>
-  </div>
+      <div class="film-info">
+        <div class="film-tag">Documentary · 2026</div>
+        <div class="film-title">Manatee County Fair</div>
+       <p class="film-desc">Watch as Nolan Film Studios takes a deep dive into the Manatee County Fair!</p>
+      </div>
+    <div class="film-card" data-type="short">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/V29UgOGQz8Y" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+       <div class="film-info">
+        <div class="film-tag">Short Film · 2026</div>
+        <div class="film-title">Stranger Colts</div>
+       <p class="film-desc">Nolan Film Productions spent weeks producing a wonderful homage to Netflix's Stranger Things.  Follow our kids into the basement for a game of D&D.</p>
+      </div>
+   </div>
 </div>
-    </div>
+    
+  
   </div>
+
+    
+
 
   <div class="media-callout">
     <div>
@@ -1667,92 +1685,25 @@
 <!-- ══════════════════════ EVENTS ══════════════════════ -->
 <div class="page" id="page-events">
 
-  <div class="page-header">
+  <div class="page-header" style="background-image: url('IMG_2053\ 2.JPG'); background-size: cover; background-position: center;"> 
     <p class="section-eyebrow">Events</p>
     <h1>Join us on <em>screen</em>.</h1>
   </div>
 
   <div class="events-list">
 
-    <div class="event-item">
-      <div class="event-date-block">
-        <div class="event-month">JUL</div>
-        <div class="event-day">12</div>
-        <div class="event-year">2025</div>
-      </div>
-      <div class="event-content">
-        <h3>Summer Screening Night</h3>
-        <div class="event-meta">
-          <span>7:00 PM</span>
-          <span>Riverview Park Amphitheater</span>
-          <span>Free Admission</span>
-        </div>
-        <p class="event-desc">An outdoor evening screening featuring short films produced by MCFC members this year, followed by a Q&A with the filmmakers. Bring a blanket and enjoy the night air.</p>
-      </div>
-      <div class="event-badge upcoming">Upcoming</div>
-    </div>
-
-    <div class="event-item">
-      <div class="event-date-block">
-        <div class="event-month">JUL</div>
-        <div class="event-day">26</div>
-        <div class="event-year">2025</div>
-      </div>
-      <div class="event-content">
-        <h3>Intro to Filmmaking Workshop</h3>
-        <div class="event-meta">
-          <span>10:00 AM – 2:00 PM</span>
-          <span>Bradenton Library, Room B</span>
-          <span>Members Free · $10 Public</span>
-        </div>
-        <p class="event-desc">A hands-on half-day workshop covering the basics of camera operation, shot composition, and storytelling. Open to all skill levels. Equipment provided.</p>
-      </div>
-      <div class="event-badge upcoming">Upcoming</div>
-    </div>
-
-    <div class="event-item">
-      <div class="event-date-block">
-        <div class="event-month">AUG</div>
-        <div class="event-day">9</div>
-        <div class="event-year">2025</div>
-      </div>
-      <div class="event-content">
-        <h3>Monthly Member Meeting</h3>
-        <div class="event-meta">
-          <span>6:30 PM</span>
-          <span>TBD — Manatee County</span>
-          <span>Members Only</span>
-        </div>
-        <p class="event-desc">Our regular monthly gathering to discuss upcoming productions, review works in progress, plan events, and welcome new members.</p>
-      </div>
-      <div class="event-badge upcoming">Upcoming</div>
-    </div>
-
-    <div class="event-item">
-      <div class="event-date-block">
-        <div class="event-month">JUN</div>
-        <div class="event-day">7</div>
-        <div class="event-year">2025</div>
-      </div>
-      <div class="event-content">
-        <h3>Documentary Showcase</h3>
-        <div class="event-meta">
-          <span>6:00 PM</span>
-          <span>Bishop Museum of Science</span>
-          <span>Free Admission</span>
-        </div>
-        <p class="event-desc">A public screening of three new documentaries made by MCFC members, exploring stories from across the county. Refreshments provided by local sponsors.</p>
-      </div>
-      <div class="event-badge" style="border-color:rgba(245,244,240,0.1)">Past</div>
-    </div>
-
+    <div style="padding: 80px 0; text-align:center; border-top: 1px solid rgba(245,244,240,0.08); border-bottom: 1px solid rgba(245,244,240,0.08);">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;color:var(--gray-dark);margin-bottom:16px">COMING SOON</p>
+      <h3 style="font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:16px;">No events scheduled yet.</h3>
+     <p style="font-size:14px;color:var(--gray-mid);max-width:400px;margin:0 auto 32px;font-weight:300;line-height:1.7;">Check back soon — follow us on Instagram for the latest updates.</p>
+      <a href="https://www.instagram.com/manateecountyfilmclub" target="_blank" class="btn-ghost">Follow @manateecountyfilmclub</a>
+  </div>
   </div>
 
 </div>
 
 <!-- ══════════════════════ SPONSORS ══════════════════════ -->
 <div class="page" id="page-sponsors">
-
   <div class="page-header">
     <p class="section-eyebrow">Sponsors</p>
     <h1>Help us tell <em>bigger</em> stories.</h1>
