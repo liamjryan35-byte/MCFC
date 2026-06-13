@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manatee County Film Club</title>
+<link rel="icon" type="image/jpeg" href="IMG_2108.JPEG">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'AmericanTypewriter';
+    src: local('American Typewriter'), local('AmericanTypewriter'), local('American Typewriter Condensed');
+    font-weight: normal;
+  }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --gray-light: #e8e6e1;
+    --gray-mid: #b0aea8;
+    --gray-dark: #3a3936;
+    --accent: #f5f4f0;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'Space Mono', monospace;
+    --nav-h: 72px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(10,10,10,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--white);
+  }
+
+  .nav-logo-mark {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-mark img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+
+  .nav-wordmark {
+    font-family: 'AmericanTypewriter', 'American Typewriter', 'Courier New', Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .nav-wordmark span {
+    display: block;
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    color: var(--gray-mid);
+    font-style: normal;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gray-mid);
+    font-size: 13px;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+  .nav-cta {
+    background: var(--white) !important;
+    color: var(--black) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: var(--black);
+    border-bottom: 1px solid rgba(245,244,240,0.1);
+    padding: 24px 32px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none;
+    color: var(--gray-mid);
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(245,244,240,0.06);
+  }
+  .mobile-menu a:hover { color: var(--white); }
+
+  /* ── PAGES ── */
+  .page { display: none; padding-top: var(--nav-h); }
+  .page.active { display: block; }
+
+  /* ── HOME ── */
+  .hero {
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-film-strip {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 48%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .hero-film-strip div {
+    aspect-ratio: 4/3;
+    border: 1px solid var(--white);
+    position: relative;
+  }
+
+  .hero-film-strip div::before,
+  .hero-film-strip div::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid var(--white);
+  }
+
+  .hero-film-strip div::before {
+    width: 40%; padding-top: 40%;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gray-mid);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gray-mid);
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 1.0;
+    font-weight: 400;
+    max-width: 620px;
+    margin-bottom: 32px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gray-mid);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--gray-mid);
+    max-width: 440px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--black);
+    padding: 14px 32px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    padding: 13px 32px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(245,244,240,0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-dark);
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--gray-dark);
+  }
+
+  .home-mission {
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gray-mid);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gray-mid); }
+
+  .section-body {
+    font-size: 15px;
+    color: var(--gray-mid);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .section-body p + p { margin-top: 1em; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(245,244,240,0.08);
+    border: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .stat-cell {
+    background: var(--black);
+    padding: 32px 28px;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+  }
+
+  .home-marquee {
+    border-top: 1px solid rgba(245,244,240,0.08);
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+  }
+
+  .marquee-track span {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--gray-dark);
+    padding: 0 40px;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .home-cta-band {
+    padding: 100px 48px;
+    text-align: center;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .home-cta-band h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .home-cta-band p {
+    color: var(--gray-mid);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .page-header {
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .page-header .section-eyebrow { margin-bottom: 16px; }
+
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.05;
+    max-width: 700px;
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--gray-mid); }
+
+  .about-story {
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .about-story .lead {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    font-style: italic;
+    color: var(--gray-mid);
+  }
+
+  .about-sidebar {
+    padding-top: 8px;
+  }
+
+  .about-sidebar-item {
+    padding: 20px 0;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .about-sidebar-item:last-child { border-bottom: 1px solid rgba(245,244,240,0.08); }
+
+  .about-sidebar-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+    margin-bottom: 6px;
+  }
+
+  .about-sidebar-value {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .about-values {
+    padding: 80px 48px;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,244,240,0.08);
+    margin-top: 48px;
+  }
+
+  .value-card {
+    background: var(--black);
+    padding: 40px 32px;
+  }
+
+  .value-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .value-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .value-body {
+    font-size: 14px;
+    color: var(--gray-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── TEAM ── */
+  .team-grid {
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(245,244,240,0.08);
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .team-card {
+    background: var(--black);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+
+  .team-card:hover { background: #111; }
+
+  .team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .team-avatar-photo {
+    border: 1.5px dashed rgba(245,244,240,0.2);
+    background: #111;
+  }
+
+  .team-name-placeholder {
+    font-style: italic;
+  }
+
+  .team-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,244,240,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--gray-mid);
+  }
+
+  .team-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .team-role {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--gray-mid);
+    margin-bottom: 16px;
+  }
+
+  .team-bio {
+    font-size: 13px;
+    color: var(--gray-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .team-join-band {
+    padding: 80px 48px;
+    border-top: 1px solid rgba(245,244,240,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  /* ── FILMS ── */
+  .films-filter {
+    padding: 32px 48px;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    color: var(--gray-mid);
+    border: 1px solid rgba(245,244,240,0.15);
+    padding: 8px 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+  }
+
+  .films-grid {
+    padding: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+
+  .film-card {
+    border: 1px solid rgba(245,244,240,0.1);
+    overflow: hidden;
+    border-radius: 2px;
+    transition: border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .film-card:hover { border-color: rgba(245,244,240,0.35); }
+
+  .film-thumb {
+    height: 180px;
+    background: var(--gray-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .film-thumb-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.3;
+  }
+
+  .film-play-icon {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .film-play-icon::after {
+    content: '';
+    border-style: solid;
+    border-width: 7px 0 7px 14px;
+    border-color: transparent transparent transparent var(--white);
+    margin-left: 3px;
+  }
+
+  .film-info { padding: 20px; }
+
+  .film-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+    margin-bottom: 8px;
+  }
+
+  .film-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+
+  .film-desc {
+    font-size: 13px;
+    color: var(--gray-mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .media-callout {
+    margin: 0 48px 48px;
+    padding: 40px;
+    border: 1px solid rgba(245,244,240,0.1);
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .media-callout h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .media-callout p {
+    font-size: 14px;
+    color: var(--gray-mid);
+    max-width: 440px;
+    font-weight: 300;
+  }
+
+  /* ── EVENTS ── */
+  .events-list {
+    padding: 48px;
+  }
+
+  .event-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 32px;
+    align-items: start;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+    transition: background 0.2s;
+  }
+
+  .event-item:first-child { border-top: 1px solid rgba(245,244,240,0.08); }
+
+  .event-date-block {
+    text-align: center;
+  }
+
+  .event-month {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+    margin-bottom: 4px;
+  }
+
+  .event-day {
+    font-family: var(--serif);
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .event-year {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--gray-dark);
+    margin-top: 4px;
+  }
+
+  .event-content h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .event-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gray-mid);
+    margin-bottom: 12px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .event-desc {
+    font-size: 14px;
+    color: var(--gray-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .event-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border: 1px solid rgba(245,244,240,0.2);
+    border-radius: 2px;
+    color: var(--gray-mid);
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  .event-badge.upcoming {
+    border-color: var(--white);
+    color: var(--white);
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    padding: 80px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .form-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: transparent;
+    border: 1px solid rgba(245,244,240,0.15);
+    color: var(--white);
+    padding: 12px 16px;
+    font-family: var(--sans);
+    font-size: 14px;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: rgba(245,244,240,0.5);
+  }
+
+  .form-select option { background: var(--black); }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .contact-info-item {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .contact-info-item:first-child { border-top: 1px solid rgba(245,244,240,0.08); }
+
+  .contact-info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray-mid);
+    margin-bottom: 6px;
+  }
+
+  .contact-info-value {
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  /* ── SPONSORS ── */
+  .sponsors-coming-soon {
+    padding: 120px 48px;
+    text-align: center;
+  }
+
+  .sponsors-coming-soon h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .sponsors-coming-soon p {
+    color: var(--gray-mid);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .sponsor-tier-preview {
+    margin: 60px auto 0;
+    max-width: 680px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(245,244,240,0.08);
+  }
+
+  .sponsor-tier {
+    background: var(--black);
+    padding: 36px 24px;
+    text-align: left;
+  }
+
+  .tier-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gray-mid);
+    margin-bottom: 16px;
+  }
+
+  .tier-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+  .tier-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tier-perks li {
+    font-size: 12px;
+    color: var(--gray-mid);
+    font-weight: 300;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .tier-perks li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gray-dark);
+    font-family: var(--mono);
+    font-size: 10px;
+  }
+
+  /* ── ADVISOR SECTION ── */
+  .advisor-section {
+    padding: 60px 48px;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .advisor-cards {
+    display: flex;
+    gap: 24px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .advisor-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(245,244,240,0.1);
+    padding: 24px 28px;
+    flex: 1;
+    min-width: 260px;
+    border-radius: 2px;
+  }
+
+  .advisor-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,244,240,0.2);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--gray-mid);
+  }
+
+  .advisor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .advisor-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+
+  .advisor-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--gray-mid);
+    margin-bottom: 8px;
+  }
+
+  .advisor-note {
+    font-size: 13px;
+    color: var(--gray-mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── MEMBER ROSTER ── */
+  .roster-section {
+    padding: 60px 48px;
+    border-top: 1px solid rgba(245,244,240,0.08);
+  }
+
+  .roster-search-bar {
+    margin-top: 28px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .roster-search {
+    background: transparent;
+    border: 1px solid rgba(245,244,240,0.15);
+    color: var(--white);
+    padding: 9px 16px;
+    font-family: var(--sans);
+    font-size: 13px;
+    border-radius: 2px;
+    outline: none;
+    width: 260px;
+    transition: border-color 0.2s;
+  }
+
+  .roster-search:focus { border-color: rgba(245,244,240,0.45); }
+  .roster-search::placeholder { color: var(--gray-dark); }
+
+  .roster-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gray-dark);
+    margin-left: auto;
+  }
+
+  .roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .roster-table thead tr {
+    border-bottom: 1px solid rgba(245,244,240,0.15);
+  }
+
+  .roster-table th {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--gray-dark);
+    text-align: left;
+    padding: 10px 16px 10px 0;
+    font-weight: 400;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .roster-table th:hover { color: var(--gray-mid); }
+
+  .roster-table tbody tr {
+    border-bottom: 1px solid rgba(245,244,240,0.06);
+    transition: background 0.15s;
+  }
+
+  .roster-table tbody tr:hover { background: rgba(245,244,240,0.03); }
+
+  .roster-table td {
+    padding: 12px 16px 12px 0;
+    vertical-align: middle;
+  }
+
+  .roster-member-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .roster-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,244,240,0.15);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-mid);
+  }
+
+  .roster-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .roster-name {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .roster-team {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--gray-mid);
+  }
+
+  .roster-role-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border: 1px solid rgba(245,244,240,0.12);
+    border-radius: 2px;
+    color: var(--gray-mid);
+    white-space: nowrap;
+  }
+
+  .roster-detail {
+    font-size: 13px;
+    color: var(--gray-mid);
+    font-weight: 300;
+  }
+
+  .roster-empty {
+    text-align: center;
+    padding: 48px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gray-dark);
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .roster-section, .advisor-section { padding-left: 24px; padding-right: 24px; }
+    .roster-table th:nth-child(3),
+    .roster-table td:nth-child(3),
+    .roster-table th:nth-child(5),
+    .roster-table td:nth-child(5) { display: none; }
+    .roster-search { width: 100%; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(245,244,240,0.08);
+    padding: 48px 48px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand { grid-column: 1; }
+
+  .footer-wordmark {
+    font-family: var(--serif);
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--gray-mid);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 220px;
+  }
+
+  .footer-col-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gray-dark);
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--gray-mid);
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(245,244,240,0.08);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom p {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--gray-dark);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .hero { padding: 60px 24px 80px; }
+    .hero-film-strip { display: none; }
+    .home-mission, .about-story, .contact-grid { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+    .values-grid { grid-template-columns: 1fr; }
+    .page-header, .about-values, .team-join-band, .events-list, .films-grid, .films-filter, .sponsors-coming-soon { padding-left: 24px; padding-right: 24px; }
+    .films-grid { padding: 32px 24px; }
+    .team-grid { padding: 0; }
+    .home-cta-band { padding: 60px 24px; }
+    .media-callout { margin: 0 24px 32px; padding: 28px 24px; }
+    .event-item { grid-template-columns: 80px 1fr; }
+    .event-badge { display: none; }
+    footer { grid-template-columns: 1fr; padding: 40px 24px 24px; }
+    .sponsor-tier-preview { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+    <div class="nav-logo-mark">
+      <img src="mcfc-logo.JPEG" alt="MCFC Logo">
+    </div>
+    <div class="nav-wordmark">
+      Manatee County
+      <span>Film Club</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" data-page="home">Home</a></li>
+    <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a href="#" onclick="showPage('team')" data-page="team">Team</a></li>
+    <li><a href="#" onclick="showPage('films')" data-page="films">Films & Media</a></li>
+    <li><a href="#" onclick="showPage('events')" data-page="events">Events</a></li>
+    <li><a href="#" onclick="showPage('sponsors')" data-page="sponsors">Sponsors</a></li>
+    <li><a href="#" onclick="showPage('contact')" data-page="contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="showPage('home');toggleMobile()">Home</a>
+  <a href="#" onclick="showPage('about');toggleMobile()">About</a>
+  <a href="#" onclick="showPage('team');toggleMobile()">Team</a>
+  <a href="#" onclick="showPage('films');toggleMobile()">Films & Media</a>
+  <a href="#" onclick="showPage('events');toggleMobile()">Events</a>
+  <a href="#" onclick="showPage('sponsors');toggleMobile()">Sponsors</a>
+  <a href="#" onclick="showPage('contact');toggleMobile()">Contact</a>
+</div>
+
+<!-- ══════════════════════ HOME ══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero" style="background-image: url('ybook-62.JPG'); background-size: cover; background-position: center;">
+    <div class="hero-film-strip" aria-hidden="true">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
+    <div class="hero-eyebrow">Manatee County, Florida</div>
+    <h1 class="hero-headline">Where <em>stories</em> come to life.</h1>
+    <p class="hero-sub">A community of filmmakers, storytellers, and cinema lovers creating, screening, and celebrating the art of film right here in Manatee County.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="showPage('about')">Learn about us</a>
+      <a href="#" class="btn-ghost" onclick="showPage('events')">Upcoming events</a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">Scroll</div>
+  </section>
+
+  <div class="home-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Documentaries</span><span>Short Films</span><span>Screenings</span><span>Workshops</span><span>Cinematography</span><span>Local Stories</span><span>Community Cinema</span><span>Film Production</span>
+      <span>Documentaries</span><span>Short Films</span><span>Screenings</span><span>Workshops</span><span>Cinematography</span><span>Local Stories</span><span>Community Cinema</span><span>Film Production</span>
+    </div>
+  </div>
+
+  <section class="home-mission">
+    <div>
+      <p class="section-eyebrow">Our Mission</p>
+      <h2 class="section-title">Film is for <em>everyone</em>.</h2>
+      <div class="section-body">
+        <p>Manatee County Film Club brings together aspiring and experienced filmmakers to learn, collaborate, and share their work. Whether you've never touched a camera or you're a seasoned director, there's a place for you here.</p>
+        <p>We host regular screenings, hands-on workshops, and production projects — giving our community real tools and real experience to tell their stories on screen.</p>
+      </div>
+      <br>
+      <a href="#" class="btn-ghost" onclick="showPage('about')" style="margin-top:8px">Read our story</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-number">29</div>
+        <div class="stat-label">Members</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Films made</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Screenings hosted</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Years running</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-cta-band">
+    <h2>Ready to join the <em style="font-style:italic;color:var(--gray-mid)">crew</em>?</h2>
+    <p>Membership is open to everyone in Manatee County. No experience required — just a passion for film.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#" class="btn-primary" onclick="showPage('contact')">Get in touch</a>
+      <a href="#" class="btn-ghost" onclick="showPage('sponsors')">Become a sponsor</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════ ABOUT ══════════════════════ -->
+<div class="page" id="page-about">
+
+  <div class="page-header" style="background-image: url('IMG_2121.jpg'); background-size: cover; background-position: center;">
+    <p class="section-eyebrow">About</p>
+    <h1>Cinema rooted in <em>community</em>.</h1>
+  </div>
+
+  <section class="about-story">
+    <div>
+      <p class="lead">"We started with a camera, a story, and a group of people who believed Manatee County deserved its own cinematic voice."</p>
+      <div class="section-body">
+        <p>The Manatee County Film Club was founded with a simple belief: great filmmaking shouldn't be limited to Hollywood. Our county is full of extraordinary people, places, and stories — and we exist to capture them.</p>
+        <p>We're a volunteer-driven, community-supported organization offering free and low-cost programs for anyone who wants to explore filmmaking. From introductory workshops to full production projects, we meet people where they are and help them grow.</p>
+        <p>Our screenings bring the community together to watch, discuss, and celebrate films — both locally made and from around the world. We believe cinema creates empathy, sparks conversation, and builds a stronger, more connected community.</p>
+      <img src="IMG_4731.jpeg" style="width:100%; margin-top:28px; object-fit:cover; height:260px; border:1px solid rgba(245,244,240,0.1);">
+    </div>
+    <div class="about-sidebar">
+      <div class="about-sidebar-item">
+        <div class="about-sidebar-label">Founded</div>
+        <div class="about-sidebar-value">2026 - Manatee County, FL</div>
+      </div>
+      <div class="about-sidebar-item">
+        <div class="about-sidebar-label">Type</div>
+        <div class="about-sidebar-value">Community Organization</div>
+      </div>
+      <div class="about-sidebar-item">
+        <div class="about-sidebar-label">Focus</div>
+        <div class="about-sidebar-value">Film Production, Education & Screening</div>
+      </div>
+      <div class="about-sidebar-item">
+        <div class="about-sidebar-label">Open to</div>
+        <div class="about-sidebar-value">All skill levels, all ages</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-values">
+    <p class="section-eyebrow">What we stand for</p>
+    <h2 class="section-title">Our values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <div class="value-title">Access</div>
+        <p class="value-body">Film belongs to everyone. We remove financial and technical barriers so that any person in our county can participate, learn, and create using industry standard materials, technology, and equipment.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <div class="value-title">Community</div>
+        <p class="value-body">Our best work happens when we collaborate. We foster an environment where every voice is heard and every perspective is valued.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <div class="value-title">Craft</div>
+        <p class="value-body">We take the art of filmmaking seriously. Through workshops, mentorship, and hands-on production, we help our members grow into skilled storytellers.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════ TEAM ══════════════════════ -->
+<div class="page" id="page-team">
+
+  <div class="page-header" style="background-image: url('IMG_1273.JPG'); background-size: cover; background-position: center;">
+    <p class="section-eyebrow">Team</p>
+    <h1>The people <em>behind</em> the lens.</h1>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">P</div>
+      <div class="team-name">President</div>
+      <div class="team-role">Liam R</div>
+      <p class="team-bio">Leads the club's vision, programming, and community partnerships. Passionate about connecting local storytellers with audiences.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">VP</div>
+      <div class="team-name">Vice President</div>
+      <div class="team-role">Sara T</div>
+      <p class="team-bio">Oversees day-to-day club operations, member communications, and coordinates with venues for screenings and events.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">S</div>
+      <div class="team-name">Secretary</div>
+      <div class="team-role">Ella F</div>
+      <p class="team-bio">Manages meeting records, correspondence, and member onboarding. Keeps the club running smoothly behind the scenes.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">T</div>
+      <div class="team-name">Treasurer</div>
+      <div class="team-role">Gianna B</div>
+      <p class="team-bio">Handles the club's finances, tracks equipment fund goals, and manages sponsor relationships and grant applications.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">PD</div>
+      <div class="team-name">Production Director</div>
+      <div class="team-role">Julian L</div>
+      <p class="team-bio">Leads film production projects from concept to screen. Organizes workshops and mentors new filmmakers through their first projects.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">ME</div>
+      <div class="team-name">Media &amp; Events</div>
+      <div class="team-role">Ella T</div>
+      <p class="team-bio">Curates screening programs, organizes events, and manages the club's social media presence and film archive.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar team-avatar-photo" id="team-photo-pd2">
+        <span class="team-avatar-placeholder">PD</span>
+      </div>
+      <div class="team-name">Production Director</div>
+      <div class="team-role">Logan B</div>
+      <p class="team-bio">Assists in leading film production projects and workshops. Helps mentor members through hands-on production and post-production work.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar team-avatar-photo" id="team-photo-me2">
+        <span class="team-avatar-placeholder">ME</span>
+      </div>
+      <div class="team-name">Media & Events</div>
+      <div class="team-role">Juliana F</div>
+      <p class="team-bio">Supports screening curation, event coordination, and social media. Helps grow the club's presence and community engagement.</p>
+    </div>
+  </div>
+
+  <!-- ADVISORS -->
+  <div class="advisor-section">
+    <p class="section-eyebrow">Advisors</p>
+    <h2 class="section-title" style="font-size:28px;margin-bottom:4px">Our <em>advisors</em>.</h2>
+    <p class="section-body" style="font-size:14px;max-width:500px">Experienced mentors who guide the club's direction and support our mission.</p>
+    <div class="advisor-cards">
+      <div class="advisor-card">
+        <div class="advisor-photo" id="advisor-photo-1">A</div>
+        <div>
+          <div class="advisor-name">Christopher Robinson</div>
+          <div class="advisor-title">Club & Program Director</div>
+          <p class="advisor-note">A veteran educator with 15 years of experience in Manatee County, Mr. Robinson is the founder of Nolan Middle School's film production program. Their dedication to hands-on, creative education has equipped countless students with the technical and storytelling skills to bring their visions to the screens.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBER ROSTER -->
+  <div class="roster-section">
+    <p class="section-eyebrow">Members</p>
+    <h2 class="section-title" style="font-size:28px;margin-bottom:4px">Club <em>roster</em>.</h2>
+    <p class="section-body" style="font-size:14px;max-width:500px;margin-bottom:0">All active members of the Manatee County Film Club.</p>
+
+    <div class="roster-search-bar">
+      <input class="roster-search" type="text" placeholder="Search members..." oninput="filterRoster(this.value)">
+      <span class="roster-count" id="roster-count">— members</span>
+    </div>
+
+    <table class="roster-table" id="roster-table">
+      <thead>
+        <tr>
+          <th onclick="sortRoster('name')">Member ↕</th>
+          <th onclick="sortRoster('role')">Role ↕</th>
+          <th onclick="sortRoster('chapter')">Chapter ↕</th>
+          <th onclick="sortRoster('joined')">Joined ↕</th>
+        </tr>
+      </thead>
+      <tbody id="roster-body">
+        <!-- rows injected by JS -->
+      </tbody>
+    </table>
+    <div class="roster-empty" id="roster-empty">No members match your search.</div>
+  </div>
+
+  <div class="team-join-band">
+    <div>
+      <h3 class="section-title" style="font-size:28px">Want to be part of the team?</h3>
+      <p class="section-body" style="max-width:440px">We're always looking for passionate people to help lead programs, coordinate events, and grow the club.</p>
+    </div>
+    <a href="#" class="btn-primary" onclick="showPage('contact')">Get involved</a>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ FILMS & MEDIA ══════════════════════ -->
+<div class="page" id="page-films">
+
+  <div class="page-header" style="position:relative ; overflow:hidden;">
+    <video autoplay muted loop playsinline
+    style="position:absolute ; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;">
+    <source src="Trailer.mp4" type="video/mp4">
+    </video>
+    <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); z-index:1;"></div>
+    <div style="position:relative; z-index:2;">
+      <p class="section-eyebrow">About</p>
+      <h1>Cinema rooted in <em>community</em>.</h1>
+    </div>
+    <p class="section-eyebrow">Films & Media</p>
+    <h1>Made in <em>Manatee</em>.</h1>
+  </div>
+
+  <div class="films-filter">
+    <button class="filter-btn active" onclick="filterFilms(this, 'all')">All</button>
+    <button class="filter-btn" onclick="filterFilms(this, 'documentary')">Documentaries</button>
+    <button class="filter-btn" onclick="filterFilms(this, 'short')">Short Films</button>
+    <button class="filter-btn" onclick="filterFilms(this, 'hype')">Hype Videos</button>
+  </div>
+
+  <div class="films-grid">
+    <div class="film-card" data-type="documentary">
+      <div class="film-thumb" style="padding:0; height:200px;">
+       <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/yZnfhmq-7e4" frameborder="0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block;" ></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Documentary · 2026</div>
+        <div class="film-title">8th Grade Formal</div>
+        <p class="film-desc">Thank you 8th grade</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="short">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hXPU5Ih154g" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Short Film · 2026</div>
+        <div class="film-title">House Of Colts S2 E2</div>
+        <p class="film-desc">Welcome to the fun of film</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="short">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/eRCLSBQrRWo" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Short Film · 2026</div>
+        <div class="film-title">House of Colts S2 E3</div>
+        <p class="film-desc">Blayton tries soccer for the first time</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="hype">
+      <div class="film-thumb" style="padding:0; height:200px;">
+       <iframe width="100%" height="100%" src="https://www.youtube.com/embed/7d8uygbZEAU" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Hype Video · 2026</div>
+        <div class="film-title">Gus Games</div>
+        <p class="film-desc">Get ready for the return of the Tournament of Champions! Compete in this year's Gus Games!</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="hype">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/mhiYeR11s8Q" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Hype Video · 2026</div>
+        <div class="film-title">Haunted House Trailer</div>
+        <p class="film-desc">We are so excited to host this years NJHS Haunted House!</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="short">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/tDmm4HDInC0" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Short Film · 2026</div>
+        <div class="film-title">House of Colts S2 E1</div>
+        <p class="film-desc">House of Colts season 2 returns</p>
+      </div>
+    </div>
+    <div class="film-card" data-type="documentary">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZRTgKZKKYi0" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+      <div class="film-info">
+        <div class="film-tag">Documentary · 2026</div>
+        <div class="film-title">Manatee County Fair</div>
+       <p class="film-desc">Watch as Nolan Film Studios takes a deep dive into the Manatee County Fair!</p>
+      </div>
+    <div class="film-card" data-type="short">
+      <div class="film-thumb" style="padding:0; height:200px;">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/V29UgOGQz8Y" frameborder="0" allowfullscreen style="display:block;"></iframe>
+      </div>
+       <div class="film-info">
+        <div class="film-tag">Short Film · 2026</div>
+        <div class="film-title">Stranger Colts</div>
+       <p class="film-desc">Nolan Film Productions spent weeks producing a wonderful homage to Netflix's Stranger Things.  Follow our kids into the basement for a game of D&D.</p>
+      </div>
+   </div>
+</div>
+    
+  
+  </div>
+
+    
+
+
+  <div class="media-callout">
+    <div>
+      <h3>Have a film to share?</h3>
+      <p>MCFC members can submit their work for inclusion in our archive and upcoming screening programs. We showcase films at all levels and genres.</p>
+    </div>
+    <a href="#" class="btn-primary" onclick="showPage('contact')">Submit your film</a>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ EVENTS ══════════════════════ -->
+<div class="page" id="page-events">
+
+  <div class="page-header" style="background-image: url('IMG_2053\ 2.JPG'); background-size: cover; background-position: center;"> 
+    <p class="section-eyebrow">Events</p>
+    <h1>Join us on <em>screen</em>.</h1>
+  </div>
+
+  <div class="events-list">
+
+    <div style="padding: 80px 0; text-align:center; border-top: 1px solid rgba(245,244,240,0.08); border-bottom: 1px solid rgba(245,244,240,0.08);">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.2em;color:var(--gray-dark);margin-bottom:16px">COMING SOON</p>
+      <h3 style="font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:16px;">No events scheduled yet.</h3>
+     <p style="font-size:14px;color:var(--gray-mid);max-width:400px;margin:0 auto 32px;font-weight:300;line-height:1.7;">Check back soon — follow us on Instagram for the latest updates.</p>
+      <a href="https://www.instagram.com/manateecountyfilmclub" target="_blank" class="btn-ghost">Follow @manateecountyfilmclub</a>
+  </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════ SPONSORS ══════════════════════ -->
+<div class="page" id="page-sponsors">
+  <div class="page-header" style="position:relative; overflow:hidden; background-image: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)), url('sage-transparent.png'); background-size: 55%; background-position: center right; background-repeat: no-repeat;">
+    <p class="section-eyebrow">Sponsors</p>
+    <h1>Help us tell <em>bigger</em> stories.</h1>
+  </div>
+
+  <div class="sponsors-coming-soon">
+    <h2>Thank you to our<em style="font-style:italic;color:var(--gray-mid)">partners</em></h2>
+    <p>We're building a formal sponsorship program to fund new equipment, expanded workshops, and wider community screenings. Get in early and become a founding sponsor of MCFC.</p>
+    <a href="#" class="btn-primary" onclick="showPage('contact')">Express interest</a>
+
+    <div style="border-top:1px solid rgba(245,244,240,0.08);padding-top:48px;margin-bottom:48px;">
+      <p style="font-family:var(--mono);font-size:12px;letter-spacing:0.2em;color:var(--gray-dark);margin-bottom:32px;">FOUNDING SPONSOR</p>
+      <div style="display:inline-block;border:1px solid rgba(245,244,240,0.1);padding:40px 60px;border-radius:2px;">
+        <img src="sage.png" alt="Sage Auto Studios" style="height:180px;width:auto;object-fit:contain;mix-blend-mode:screen;">
+      </div>
+      <p style="font-size:14px;color:var(--gray-mid);margin-top:16px;font-weight:300;">Sage Auto Studios — Manatee County, FL &nbsp;·&nbsp; <a href="https://sageautostudios.com" target="_blank" style="color:var(--white);text-decoration:none;border-bottom:1px solid rgba(245,244,240,0.3);">sageautostudios.com</a></p>
+    </div>
+    <div class="sponsor-tier-preview">
+      <div class="sponsor-tier">
+        <div class="tier-label">Tier 01</div>
+        <div class="tier-name">Scene</div>
+        <ul class="tier-perks">
+          <li>Film Credits</li>
+          <li>Sponsored-by screen</li>
+          <li>Buisness/Product Photos</li>
+        </ul>
+      </div>
+      <div class="sponsor-tier">
+        <div class="tier-label">Tier 02</div>
+        <div class="tier-name">Cut</div>
+        <ul class="tier-perks">
+          <li>Film Credits</li>
+          <li>Sponsored-By Screen (Enhanced)</li>
+          <li>Social Media Mention</li>
+          <li>Buisness/Product Photos</li>
+          <li>Event Flyer Display</li>
+          <li>Event Banner Display</li>
+        </ul>
+      </div>
+      <div class="sponsor-tier">
+        <div class="tier-label">Tier 03</div>
+        <div class="tier-name">Director</div>
+        <ul class="tier-perks">
+          <li>Film Credits</li>
+          <li>Sponsored-By Screen (Featured)</li>
+          <li>Buisness/Product Photos</li>
+          <li>Video Content Package</li>
+          <li>Content Delivered to Sponsor</li>
+          <li>Event Flyer Display</li>
+          <li>Event Banner Display</li>
+        </ul>
+      </div>
+      <div class="sponsor-tier">
+        <div class="tier-label">Tier 04</div>
+        <div class="tier-name">Executive Producer</div>
+        <ul class="tier-perks">
+          <li>Film Credits</li>
+          <li>Sponsored-By Screen (Featured)</li>
+          <li>Buisness/Product Photos</li>
+          <li>Video Content Package</li>
+          <li>Content Delivered to Sponsor</li>
+          <li>Event Flyer Display</li>
+          <li>Event Banner Display</li>
+          <li>Executive Producer Credit</li>
+          <li>Printing Covered By MCFC</li>
+          <li>First Right of Refusal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ CONTACT ══════════════════════ -->
+<div class="page" id="page-contact">
+
+  <div class="page-header">
+    <p class="section-eyebrow">Contact</p>
+    <h1>Let's <em>talk</em>.</h1>
+  </div>
+
+  <div class="contact-grid">
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:24px">Send a message</p>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your name</label>
+          <input class="form-input" type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input class="form-input" type="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <select class="form-select">
+            <option value="">Select a topic</option>
+            <option>Membership inquiry</option>
+            <option>Sponsorship interest</option>
+            <option>Film submission</option>
+            <option>Workshop question</option>
+            <option>Event information</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <button class="btn-primary" style="align-self:flex-start" onclick="submitForm(event)">Send message</button>
+        <div id="form-confirm" style="display:none;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:var(--gray-mid);padding:12px 0;">Message sent — we'll be in touch soon.</div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-eyebrow" style="margin-bottom:24px">Get in touch</p>
+      <div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Location</div>
+          <div class="contact-info-value">Manatee County, Florida</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-value">ManateeCountyFC@gmail.com</div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-label">Follow us</div>
+          <div class="contact-info-value">@manateecountyfilmclub</div>
+        </div>
+      </div>
+
+      <div style="margin-top:48px">
+        <p class="section-eyebrow" style="margin-bottom:16px">Interested in sponsoring?</p>
+        <p class="section-body" style="font-size:14px;margin-bottom:20px">Sponsorships help us purchase new equipment, fund workshops, and grow our community programs. We'd love to discuss a partnership.</p>
+        <a href="#" class="btn-ghost" onclick="document.querySelector('.contact-form select').value='Sponsorship interest';document.querySelector('.contact-form select').focus()">Start a sponsorship conversation</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-wordmark">Manatee County Film Club</div>
+    <p class="footer-tagline">Celebrating local stories and the art of cinema in Manatee County, Florida.</p>
+  </div>
+  <div>
+    <p class="footer-col-label">Navigate</p>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('about')">About</a></li>
+      <li><a href="#" onclick="showPage('team')">Team</a></li>
+      <li><a href="#" onclick="showPage('films')">Films & Media</a></li>
+      <li><a href="#" onclick="showPage('events')">Events</a></li>
+      <li><a href="#" onclick="showPage('sponsors')">Sponsors</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-label">Connect</p>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('contact')">Contact us</a></li>
+      <li><a href="https://www.instagram.com/manateecountyfilmclub" target="_blank">Instagram</a></li>
+      <li><a href="https://www.youtube.com/@HouseOfColts" target="_blank">YouTube</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Manatee County Film Club. All rights reserved.</p>
+    <p>Manatee County, Florida</p>
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.dataset.page === id);
+    });
+    window.scrollTo({ top: 0 });
+  }
+
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  function filterFilms(btn, type) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.film-card').forEach(card => {
+      card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+    });
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    const name = document.querySelector('.form-input[type="text"]').value;
+    const email = document.querySelector('.form-input[type="email"]').value;
+    const subject = document.querySelector('.form-select').value;
+    const message = document.querySelector('.form-textarea').value;
+    fetch('https://formspree.io/f/xbdezeyk', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message })
+    }).then(() => {
+      document.getElementById('form-confirm').style.display = 'block';
+    });
+  }
+
+  // ── ROSTER DATA ── Replace these placeholder entries with your real members ──
+  // Name format: "First L." (first name + last initial only)
+  // chapter: the school/chapter they belong to
+  const rosterMembers = [
+    { name: "Brenna S.", initials: "BS", role: "Actor", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Landon C.", initials: "LC", role: "Editor/Sound Design", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Sophie S.", initials: "SS", role: "Actor", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Reese G.", initials: "RG", role: "Producer/Screenwriter", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Bailey A.", initials: "BA", role: "Actor", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Francis K.", initials: "FK", role: "Editor/Actor", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Zackary D.", initials: "ZD", role: "Actor/Lighting", chapter: "Cardinal Mooney HS", joined: "2026", photo: "" },
+    { name: "Clayton M.", initials: "CM", role: "Lighting/Sound Design", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Albree C.", initials: "AC", role: "Actor", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Quinn C.", initials: "QC", role: "Cinematographer/Photographer", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Pierce W.", initials: "PW", role: "Actor", chapter: "ODA HS", joined: "2026", photo: "" },
+    { name: "Liannah O.", initials: "LO", role: "Cinematographer/Photographer", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Maya T.", initials: "MT", role: "Director", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Ryan R.", initials: "RR", role: "Cinematographer", chapter: "Lakewood Ranch HS", joined: "2026", photo: "" },
+    { name: "Elliot K.", initials: "EK", role: "Sound Design/Lighting", chapter: "Riverview HS", joined: "2026", photo: "" },
+    { name: "Abigail C.", initials: "AC", role: "Actor", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+    { name: "Ava C.", initials: "AC", role: "Actor", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+    { name: "Blayton B.", initials: "BB", role: "Actor", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+    { name: "Paige R.", initials: "PR", role: "Actor", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+    { name: "Alina L.", initials: "AL", role: "Cinematographer", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+    { name: "Katelyn M.", initials: "KM", role: "Sound Design", chapter: "R. Dan Nolan MS", joined: "2026", photo: "" },
+  ];
+
+  let rosterSortKey = 'name';
+  let rosterSortAsc = true;
+
+  function renderRoster(data) {
+    const body = document.getElementById('roster-body');
+    const empty = document.getElementById('roster-empty');
+    const count = document.getElementById('roster-count');
+    if (!body) return;
+    if (data.length === 0) {
+      body.innerHTML = '';
+      empty.style.display = 'block';
+      count.textContent = '0 members';
+      return;
+    }
+    empty.style.display = 'none';
+    count.textContent = data.length + ' member' + (data.length !== 1 ? 's' : '');
+    body.innerHTML = data.map(m => `
+      <tr>
+        <td>
+          <div class="roster-member-cell">
+            <div class="roster-avatar">
+              ${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : m.initials}
+            </div>
+            <div class="roster-name">${m.name}</div>
+          </div>
+        </td>
+        <td><span class="roster-role-badge">${m.role}</span></td>
+        <td class="roster-detail">${m.chapter}</td>
+        <td class="roster-detail">${m.joined}</td>
+      </tr>
+    `).join('');
+  }
+
+  function filterRoster(query) {
+    const q = query.toLowerCase();
+    const filtered = rosterMembers.filter(m =>
+      m.name.toLowerCase().includes(q) ||
+      m.role.toLowerCase().includes(q) ||
+      m.chapter.toLowerCase().includes(q)
+    );
+    renderRoster(filtered);
+  }
+
+  function sortRoster(key) {
+    if (rosterSortKey === key) rosterSortAsc = !rosterSortAsc;
+    else { rosterSortKey = key; rosterSortAsc = true; }
+    const sorted = [...rosterMembers].sort((a, b) => {
+      const av = a[key] || '', bv = b[key] || '';
+      return rosterSortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    renderRoster(sorted);
+  }
+
+  renderRoster(rosterMembers);
+</script>
+</body>
+</html>
